@@ -52,11 +52,17 @@ function App() {
         className="mx-auto max-h-[75svh] max-w-3xl overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500 scrollbar-track-white rounded-lg border border-slate-300 bg-white p-5 shadow-xl shadow-slate-900/10"
         aria-label="Action items"
       >
-        <ul className="grid list-none gap-3 p-0">
-          {filteredActionItems.map((item) => (
-            <ActionItemRow item={item} key={item.id} onToggleStatus={handleToggleStatus} />
-          ))}
-        </ul>
+        {filteredActionItems.length === 0 ? (
+            <h2 className="m-0 py-12 text-center text-base font-semibold text-slate-950">
+              {`No ${statusFilter !== "all" ? statusFilter : ""} action items found`}
+            </h2>
+        ) : (
+          <ul className="grid list-none gap-3 p-0">
+            {filteredActionItems.map((item) => (
+              <ActionItemRow item={item} key={item.id} onToggleStatus={handleToggleStatus} />
+            ))}
+          </ul>
+        )}
       </section>
     </main>
   )
