@@ -36,24 +36,22 @@ function App() {
           Mini Action Inbox
         </h1>
       </header>
-
+      <div className="mx-auto mb-4 flex max-w-3xl items-center justify-end gap-3">
+        <select
+          className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm"
+          id="status-filter"
+          value={statusFilter}
+          onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}
+        >
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
       <section
-        className="mx-auto max-w-3xl rounded-lg border border-slate-300 bg-white p-5 shadow-xl shadow-slate-900/10"
+        className="mx-auto max-h-[75svh] max-w-3xl overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500 scrollbar-track-white rounded-lg border border-slate-300 bg-white p-5 shadow-xl shadow-slate-900/10"
         aria-label="Action items"
       >
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <select
-            className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm"
-            id="status-filter"
-            value={statusFilter}
-            onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}
-          >
-            <option value="all">All</option>
-            <option value="active">Active</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-
         <ul className="grid list-none gap-3 p-0">
           {filteredActionItems.map((item) => (
             <ActionItemRow item={item} key={item.id} onToggleStatus={handleToggleStatus} />
