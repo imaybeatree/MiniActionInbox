@@ -8,7 +8,7 @@ type ActionItemProps = {
 function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
   return (
     <li className={`rounded-md border bg-slate-50 px-4 py-3.5 text-left ${item.status === "active" ? "border-blue-500" : "border-green-500"}`}>
-      <div className="flex flex-row items-start justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h2 className="m-0 text-base font-semibold text-slate-950">
             {item.title}
@@ -18,7 +18,7 @@ function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
           </p>
         </div>
 
-        <div className="grid min-w-64 grid-cols-2 gap-x-4 gap-y-2 text-sm">
+        <div className="grid w-full grid-cols-2 gap-x-4 gap-y-2 text-sm sm:w-auto sm:min-w-64">
           <div>
             <p className="text-xs uppercase text-slate-500">
               Status
