@@ -10,10 +10,10 @@ function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
     <li className={`rounded-md border bg-slate-50 px-4 py-3.5 text-left ${item.status === "active" ? "border-blue-500" : "border-green-500"}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
-          <h2 className="m-0 text-base font-semibold text-slate-950">
+          <h2 className="m-0 line-clamp-1 text-base font-semibold text-slate-950">
             {item.title}
           </h2>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 line-clamp-4 text-sm text-slate-600">
             {item.description}
           </p>
         </div>
