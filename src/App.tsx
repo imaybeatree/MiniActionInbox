@@ -1,9 +1,6 @@
+import { mockActionItems } from './mockData'
+
 function App() {
-  const items = [
-    'Test 1',
-    'Test 2',
-    'Test 3',
-  ]
 
   return (
     <main className="min-h-svh bg-slate-50 px-5 py-8 text-slate-950">
@@ -18,12 +15,12 @@ function App() {
         aria-label="Action items"
       >
         <ul className="grid list-none gap-3 p-0">
-          {items.map((item) => (
+          {mockActionItems.map((item) => (
             <li
               className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3.5 text-left"
-              key={item}
+              key={item.id}
             >
-              {item}
+              {item.title}
             </li>
           ))}
         </ul>
