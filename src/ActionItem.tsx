@@ -2,11 +2,12 @@ import type { ActionItem } from './mockData'
 
 type ActionItemProps = {
   item: ActionItem
+  onToggleStatus: (itemId: number) => void
 }
 
-function ActionItemRow({ item }: ActionItemProps) {
+function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
   return (
-    <li className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3.5 text-left">
+    <li className={`rounded-md border bg-slate-50 px-4 py-3.5 text-left ${item.status === "active" ? "border-blue-500" : "border-green-500"}`}>
       <div className="flex flex-row items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="m-0 text-base font-semibold text-slate-950">
@@ -42,6 +43,13 @@ function ActionItemRow({ item }: ActionItemProps) {
               {item.dueDate}
             </p>
           </div>
+          <button
+            className="col-span-2 rounded-md border border-slate-300 bg-white px-3 py-2 font-medium capitalize shadow-sm hover:bg-slate-100"
+            type="button"
+            onClick={() => onToggleStatus(item.id)}
+          >
+            Mark {item.status === 'active' ? 'completed' : 'active'}
+          </button>
         </div>
       </div>
     </li>

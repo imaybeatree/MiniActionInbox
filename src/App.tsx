@@ -5,16 +5,30 @@ import { mockActionItems, type ActionItemStatus } from './mockData'
 type StatusFilter = 'all' | ActionItemStatus
 
 function App() {
+  const [actionItems, setActionItems] = useState(mockActionItems) // init using mockActionItems
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   // useMemo to only rerender on statusfilter change
   const filteredActionItems = useMemo(() => {
     if (statusFilter === 'all') {
-      return mockActionItems
+      return actionItems
     }
 
-    return mockActionItems.filter((item) => item.status === statusFilter)
-  }, [statusFilter])
+    return actionItems.filter((item) => item.status === statusFilter)
+  }, [actionItems, statusFilter])
 
+  const handleToggleStatus = (itemId: number) => {
+    setActionItems((prev) =>
+      prev.map((item) =>
+        item.id === itemId?
+            {
+              ...item,
+              status: item.status === 'active' ? 'completed' : 'active',
+            }
+          : item
+      )
+    )
+  }
+  
   return (
     <main className="min-h-svh bg-slate-50 px-5 py-8 text-slate-950">
       <header className="mx-auto mb-6 max-w-3xl border-b border-slate-300 pb-4">
@@ -42,7 +56,7 @@ function App() {
 
         <ul className="grid list-none gap-3 p-0">
           {filteredActionItems.map((item) => (
-            <ActionItemRow item={item} key={item.id} />
+            <ActionItemRow item={item} key={item.id} onToggleStatus={handleToggleStatus} />
           ))}
         </ul>
       </section>
