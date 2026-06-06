@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { ActionItem } from './mockData'
 
 type ActionItemProps = {
@@ -7,7 +8,7 @@ type ActionItemProps = {
 
 function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
   return (
-    <li className={`rounded-md border bg-slate-50 px-4 py-3.5 text-left ${item.status === "active" ? "border-blue-500" : "border-green-500"}`}>
+    <li className={`action-item-row rounded-md border bg-slate-50 px-4 py-3.5 text-left ${item.status === 'active' ? 'border-blue-500' : 'border-green-500'}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h2 className="m-0 line-clamp-1 text-base font-semibold text-slate-950">
@@ -56,4 +57,4 @@ function ActionItemRow({ item, onToggleStatus }: ActionItemProps) {
   )
 }
 
-export default ActionItemRow
+export default memo(ActionItemRow)

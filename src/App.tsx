@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState, type ChangeEvent } from 'react'
 import ActionItemRow from './ActionItem'
 import { mockActionItems, type ActionItemStatus } from './mockData'
 
@@ -7,6 +7,11 @@ type StatusFilter = 'all' | ActionItemStatus
 function App() {
   const [actionItems, setActionItems] = useState(mockActionItems) // init using mockActionItems
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
+
+  const handleFilterChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
+    setStatusFilter(event.target.value as StatusFilter)
+  }, [])
+
   // useMemo to only rerender on statusfilter change
   const filteredActionItems = useMemo(() => {
     if (statusFilter === 'all') {
@@ -16,10 +21,10 @@ function App() {
     return actionItems.filter((item) => item.status === statusFilter)
   }, [actionItems, statusFilter])
 
-  const handleToggleStatus = (itemId: number) => {
+  const handleToggleStatus = useCallback((itemId: number) => {
     setActionItems((prev) =>
       prev.map((item) =>
-        item.id === itemId?
+        item.id === itemId ?
             {
               ...item,
               status: item.status === 'active' ? 'completed' : 'active',
@@ -27,7 +32,7 @@ function App() {
           : item
       )
     )
-  }
+  }, [])
   
   return (
     <main className="min-h-svh bg-slate-50 px-5 py-8 text-slate-950">
@@ -41,7 +46,7 @@ function App() {
           className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm"
           id="status-filter"
           value={statusFilter}
-          onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}
+          onChange={handleFilterChange}
         >
           <option value="all">All</option>
           <option value="active">Active</option>

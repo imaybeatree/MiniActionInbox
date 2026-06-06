@@ -75,3 +75,8 @@ h2 {
 p {
   margin: 0;
 }
+
+.action-item-row {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+}
